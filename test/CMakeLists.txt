@@ -14,41 +14,41 @@ enable_testing()
 find_package(GTest CONFIG REQUIRED)
 
 set(SOURCE
-    main.cpp
-    entity_test.cpp
-    tree_test.cpp
-    agent_test.cpp
-    $<$<AND:$<CXX_COMPILER_ID:Clang>,$<COMPILE_FEATURES:cxx_std_20>>:
-        span_test.cpp
-        >
-    )
+  main.cpp
+  entity_test.cpp
+  tree_test.cpp
+  agent_test.cpp
+  $<$<AND:$<CXX_COMPILER_ID:Clang>,$<COMPILE_FEATURES:cxx_std_20>>:
+    span_test.cpp
+    >
+  )
 
 add_executable(gtest_project ${SOURCE})
 
 target_compile_options(gtest_project
-    PRIVATE
-        $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
-            -stdlib=libc++
-            -Wall
-            -Wextra
-            -v
-            >
-    )
+  PRIVATE
+    $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
+      -stdlib=libc++
+      -Wall
+      -Wextra
+      -v
+      >
+  )
 
 target_link_options(gtest_project
-    PRIVATE
-        $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
-            -lc++
-            >
-    )
+  PRIVATE
+    $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
+      -lc++
+      >
+  )
 
 target_link_libraries(gtest_project
-    PRIVATE
-        GTest::gtest
-        GTest::gtest_main
-        GTest::gmock
-        GTest::gmock_main
-    )
+  PRIVATE
+    GTest::gtest
+    GTest::gtest_main
+    GTest::gmock
+    GTest::gmock_main
+  )
 
 add_test(gtest gtest_project)
 

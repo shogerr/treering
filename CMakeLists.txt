@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
 
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+  set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
 endif()
 
 project(treering LANGUAGES CXX)
@@ -21,40 +21,40 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 find_package(glm CONFIG REQUIRED)
 
 set(SOURCE
-    src/main.cpp
-    )
+  src/main.cpp
+  )
 
 add_executable(${PROJECT_NAME} ${SOURCE})
 
 target_compile_options(${PROJECT_NAME}
-    PRIVATE
-        $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
-            -stdlib=libc++
-            -Wall
-            -Wextra
-            -v
-            >
-    )
+  PRIVATE
+    $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
+      -stdlib=libc++
+      -Wall
+      -Wextra
+      -v
+      >
+  )
 
 target_link_options(${PROJECT_NAME}
-    PRIVATE
-        $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
-            -lc++
-            >
-    )
+  PRIVATE
+    $<$<COMPILE_LANG_AND_ID:CXX,Clang>:
+      -lc++
+      >
+  )
 
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE
-        glm
-    )
+  PRIVATE
+    glm
+  )
 
 #target_include_directories(${PROJECT_NAME}
 #	PUBLIC
 #	)
 
 install(
-    TARGETS
-        ${PROJECT_NAME}
-    DESTINATION
-        bin/$<CONFIG>
-    )
+  TARGETS
+    ${PROJECT_NAME}
+  DESTINATION
+    bin/$<CONFIG>
+  )
